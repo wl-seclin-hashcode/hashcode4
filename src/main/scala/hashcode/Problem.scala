@@ -13,6 +13,7 @@ case class Street(
 case class Problem(
     junctions: List[Junction], 
     streets: List[Street],
+    nbCars:Int,
     virtualTime:Int, 
     initialJunction:Int)
 

@@ -19,6 +19,6 @@ object Parser {
       bidir = direction == 2
     } yield Street(jun1, jun2, bidir, cost.toInt, length.toInt)
 
-    Problem(junctions, streets, virtualTime, initialJunction)
+    Problem(junctions, streets, nbCars, virtualTime, initialJunction)
   }
 }
