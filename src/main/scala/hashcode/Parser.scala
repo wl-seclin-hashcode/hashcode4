@@ -4,13 +4,21 @@ object Parser {
   def read(): Problem = {
     val input = io.Source.fromFile("input/data.in").getLines.toList
     val first = input.head
-    val Array(nbRows, nbSlots, nbUnavailable, nbPools, nbServers) = first.split(" ").map(_.toInt)
+    val Array(nbJunctions, nbStreets, virtualTime, nbCars, initialJunction) = first.split(" ").map(_.toInt)
 
-    val servers = for {
-      (line, i) <- input.tail.drop(nbUnavailable).take(nbServers).zipWithIndex
-      Array(s, c) = line.split(" ")
-    } yield Server(s.toInt, c.toInt, i)
+    val junctions = for {
+      (line, i) <- input.tail.take(nbJunctions).zipWithIndex
+      Array(lat, long) = line.split(" ")
+    } yield Junction(lat.toFloat, long.toFloat, i)
 
-    Problem(servers)
+    val streets = for {
+      (line, i) <- input.tail.drop(nbJunctions).take(nbStreets).zipWithIndex
+      Array(j1, j2, direction, cost, length) = line.split(" ")
+      jun1 <- junctions.find(_.id == j1.toInt)
+      jun2 <- junctions.find(_.id == j2.toInt)
+      bidir = direction == 2
+    } yield Street(jun1, jun2, bidir, cost.toInt, length.toInt)
+
+    Problem(junctions, streets, virtualTime, initialJunction)
   }
 }

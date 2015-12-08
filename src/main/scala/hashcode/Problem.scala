@@ -1,8 +1,18 @@
 package hashcode
 
-case class Server(size: Int, capacity: Int, id: Int) {
-  def ratio: Float = capacity / size.toFloat
+case class Junction(lat: Float, long: Float, id: Int) {
 }
 
-case class Problem(servers: List[Server])
+case class Street(
+  junction1: Junction,
+  junction2: Junction,
+  bidir: Boolean,
+  cost: Int,
+  length: Int)
+
+case class Problem(
+    junctions: List[Junction], 
+    streets: List[Street],
+    virtualTime:Int, 
+    initialJunction:Int)
 
