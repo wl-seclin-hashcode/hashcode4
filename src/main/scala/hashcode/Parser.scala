@@ -9,7 +9,7 @@ object Parser {
     val junctions = for {
       (line, i) <- input.tail.take(nbJunctions).zipWithIndex
       Array(lat, long) = line.split(" ")
-    } yield Junction(lat.toFloat, long.toFloat, i)
+    } yield Junction(lat.toFloat, long.toFloat, i + 1)
 
     val streets = for {
       (line, i) <- input.tail.drop(nbJunctions).take(nbStreets).zipWithIndex
