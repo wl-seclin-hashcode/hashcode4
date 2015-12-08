@@ -8,12 +8,17 @@ case class Street(
   junction2: Junction,
   bidir: Boolean,
   cost: Int,
-  length: Int)
+  length: Int) {
+  def ratio = (length + 0.0) / cost
+}
 
 case class Problem(
     junctions: List[Junction], 
     streets: List[Street],
     nbCars:Int,
     virtualTime:Int, 
-    initialJunction:Int)
+    initialJunction:Int) {
+
+  val neighbours = streets.groupBy(_.junction1)
+}
 
