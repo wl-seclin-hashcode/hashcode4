@@ -19,6 +19,11 @@ case class Problem(
     virtualTime:Int, 
     initialJunction:Int) {
 
-  val neighbours = streets.groupBy(_.junction1)
+  val allStreets = streets.flatMap {
+    case s if s.bidir ⇒ List(s, Street(s.junction2, s.junction1, s.bidir, s.cost, s.length))
+    case s ⇒ List(s)
+  }
+
+  val neighbours = allStreets.groupBy(_.junction1) withDefaultValue Nil
 }
 
