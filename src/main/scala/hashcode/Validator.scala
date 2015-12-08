@@ -6,5 +6,5 @@ import scala.util.Try
 
 object Validator {
   def score(solution: Solution, problem: Problem): Try[Int] =
-    Success(solution.dummy)
+    Success(0)
 }
