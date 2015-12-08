@@ -28,6 +28,7 @@ case class Problem(
     case s            ⇒ List(s)
   }
 
+  val initJunction = junctions.head
   val neighbours = allStreets.groupBy(_.junction1) withDefaultValue Nil
 }
 

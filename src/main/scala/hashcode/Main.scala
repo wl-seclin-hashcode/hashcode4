@@ -1,13 +1,11 @@
 package hashcode
 
-import java.io.PrintStream
-import scala.util.Failure
-import scala.util.Success
+import scala.util.{Failure, Success}
 
 object Main extends App {
   val problem = Parser.read()
-  println(problem)
   val solution = Solver.solve(problem)
+
   Validator.score(solution, problem) match {
     case Success(score) =>
       println(s"score : $score")
