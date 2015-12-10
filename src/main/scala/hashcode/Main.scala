@@ -10,6 +10,7 @@ object Main extends App {
     case Success(score) =>
       println(s"score : $score")
       Formatter.write(solution, score)
+      Formatter.writeSvg(solution, problem, score)
     case Failure(e) =>
       e.printStackTrace()
   }
