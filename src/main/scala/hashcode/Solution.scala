@@ -9,7 +9,7 @@ case class Solution(cars: List[Route]) {
     import problem._
     if (segments.isEmpty) Nil
     else for {
-      (a, b) <- (1 :: segments.init) zip segments
+      (a, b) <- (0 :: segments.init) zip segments
       ja <- junctions.find(_.id == a)
       jb <- junctions.find(_.id == b)
       street <- streets.find(_.joins(ja, jb)).orElse {

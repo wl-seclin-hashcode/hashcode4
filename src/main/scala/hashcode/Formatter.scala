@@ -26,13 +26,16 @@ object Formatter {
     val maxLat = problem.junctions.maxBy(_.lat).lat
     val minLong = problem.junctions.minBy(_.long).long
     val maxLong = problem.junctions.maxBy(_.long).long
+    val maxX = 4000
+    val maxY = 3000
+
     def norm(coord: Float, min: Float, max: Float, length: Int): Int = {
       length * (coord - min) / (max - min)
     }.toInt
 
     def toPoint(junc: Junction): String = {
-      val x = norm(junc.lat, minLat, maxLat, 800)
-      val y = norm(junc.long, minLong, maxLong, 600)
+      val x = norm(junc.lat, minLat, maxLat, maxX)
+      val y = norm(junc.long, minLong, maxLong, maxY)
       s"$x,$y "
     }
 
@@ -50,7 +53,12 @@ object Formatter {
     def svg =
       <html>
         <body>
-          <svg height="600" width="800">
+          <svg height={ maxY.toString } width={ maxX.toString }>
+            {
+              for {
+                street <- problem.allStreets
+              } yield <polygon points={ streetToPoints(street) } style={ s"fill:none;stroke:lightgrey;stroke-width:1" }/>
+            }
             {
               for {
                 (streets, i) <- routes.zipWithIndex

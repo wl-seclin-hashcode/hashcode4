@@ -4,6 +4,7 @@ import scala.util.{Failure, Success}
 
 object Main extends App {
   val problem = Parser.read()
+  problem.streets.take(100).foreach(println)
   val solution = Solver.solve(problem)
 
   Validator.score(solution, problem) match {
